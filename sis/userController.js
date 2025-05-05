@@ -32,7 +32,7 @@ exports.addUser = async (req,res) => {
             res.status(200).json({message: "User added sucessfully"});
 
 })};
-//=======================================
+//======================================
 exports.viewUsers = (req,res) =>{
     const sql = "SELECT StudentID, Fullname, Email, Username, Password from Students";
 
