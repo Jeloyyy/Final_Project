@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
     const [formData, setFormData] = useState({ 
@@ -18,12 +19,19 @@ function Login() {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', formData);
+            localStorage.setItem('token', response.data.token);
+
+            const decoded = jwtDecode(response.data.token);
+            localStorage.setItem('Fullname', decoded.Fullname);
+
             if (response.data.token) {
 
                 navigate('/home');
+
             } else {
                 alert(response.data.message || 'Invalid credentials');
             }
+
         } catch (error) {
             console.error('Login error:', error.response?.data || error.message);
             alert('An error occurred. Please try again.');

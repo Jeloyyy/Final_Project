@@ -1,11 +1,22 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 function Navbar() {
+  const [Fullname, setFullname] = useState('')
+  
+  useEffect(() => {
+    const storedName= localStorage.getItem('Fullname')
+      setFullname(storedName)
+  },[]);
+
+
+
   const navigate = useNavigate()
 
   const handleLogout = () => {
-    localStorage.removeItem('token') 
+    localStorage.removeItem('token')
+    localStorage.removeItem('Fullname')
     navigate('/')
   }
 
@@ -16,6 +27,7 @@ function Navbar() {
           <div className="flex items-center">
           <img src="src/assets/logo.png" alt="Logo" className="h-20 w-20 mr-2" /><div className="text-white text-lg font-bold">IETI_MARIKINA</div>
           </div>
+          <div className="text-white text-lg font-bold">{Fullname}</div>
           <ul className="flex space-x-4">
             <li className="hover:bg-gray-700 px-2 py-1 rounded">
               <Link to="/home" className="text-white">Home</Link>
