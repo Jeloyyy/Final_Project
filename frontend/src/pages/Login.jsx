@@ -26,7 +26,7 @@ function Login() {
 
             if (response.data.token) {
 
-                navigate('/home');
+                navigate('/dashboard/home');
 
             } else {
                 alert(response.data.message || 'Invalid credentials');
