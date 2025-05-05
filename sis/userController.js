@@ -14,12 +14,11 @@ exports.loginUser=(req, res) => {
         const isMatch = await bcrypt.compare(Password, user.Password);
         if (!isMatch) return res.status(401).json({ message: "Invalid credentials"});
 
-        const token = jwt.sign({ StudentID: user.StudentID, Fullname: user.Fullname}, process.env.JWT_SECRET, { expiresIn: "1h"});
+        const token = jwt.sign({ StudentID: user.StudentID, Fullname: user.Fullname, Email: user.Email}, process.env.JWT_SECRET, { expiresIn: "1h"});
 
         res.status(200).json({ message: "Login Successful", token})
     });
 }
-
 //=======================================
 exports.addUser = async (req,res) => {
     const {Fullname, Email, Username, Password} = req.body;

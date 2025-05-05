@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 function Navbar() {
-  const [Fullname, setFullname] = useState('')
-  
+  const [Fullname, setFullname] = useState('');
+  const [Email, setEmail] = useState('');
   useEffect(() => {
-    const storedName= localStorage.getItem('Fullname')
-      setFullname(storedName)
-  },[]);
+    const storedName = localStorage.getItem('Fullname');
+    const storedEmail = localStorage.getItem('Email');
+    if (storedName) setFullname(storedName);
+    if (storedEmail) setEmail(storedEmail);
+  }, []);
 
   const navigate = useNavigate()
 

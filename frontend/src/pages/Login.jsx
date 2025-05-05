@@ -12,7 +12,7 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [e.target.name]: e.target.value,});
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleLogin = async (e) => {
@@ -23,14 +23,11 @@ function Login() {
 
             const decoded = jwtDecode(response.data.token);
             localStorage.setItem('Fullname', decoded.Fullname);
+            localStorage.setItem('Email', decoded.Email);
 
             if (response.data.token) {
-
                 navigate('/dashboard/home');
-
-            } else {
-                alert(response.data.message || 'Invalid credentials');
-            }
+            } else {alert(response.data.message || 'Invalid credentials');}
 
         } catch (error) {
             console.error('Login error:', error.response?.data || error.message);
