@@ -14,11 +14,11 @@ function Login() {
         setFormData({ ...formData, [e.target.name]: e.target.value,});
     };
 
-    const handleSubmit = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', formData);
-            if (response.data.success) {
+            if (response.data.token) {
 
                 navigate('/home');
             } else {
@@ -34,7 +34,7 @@ function Login() {
         <div className="bg-gray-400 flex items-center justify-center min-h-screen">
             <div className="p-8 shadow-md w-full max-w-md border border-black rounded-2xl" style={{ backgroundColor: '#d6cab2' }}>
                 <h1 className="text-3xl font-bold text-center mb-6">Login</h1>
-                <form className="flex flex-col gap-4 text-center" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4 text-center" onSubmit={handleLogin}>
                         <input
                             type="text"
                             name="Username"
