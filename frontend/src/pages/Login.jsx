@@ -7,7 +7,6 @@ function Login() {
         Username: '', 
         Password: '' 
     });
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -20,7 +19,7 @@ function Login() {
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', formData);
             if (response.data.success) {
-                
+
                 navigate('/home');
             } else {
                 alert(response.data.message || 'Invalid credentials');
