@@ -6,10 +6,12 @@ function Users() {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    axios.get('https://localhost:5000/api/users/viewusers')
-      .then((response) => response.json())
-      .catch((error) => console.error('Error fetching users:', error));
-  }, []);
+    axios.get('http://localhost:5000/api/users/viewusers')
+      .then((response) => {
+      setUsers(response.data);
+    })
+    .catch((error) => console.error('Error fetching users:', error));
+}, []);
 
   const filteredUsers = users.filter((user) =>
     user.Fullname.toLowerCase().includes(search.toLowerCase())
@@ -43,7 +45,8 @@ function Users() {
               <td className='border border-gray-300 p-2'>{user.Fullname}</td>
               <td className='border border-gray-300 p-2'>{user.Email}</td>
               <td className='border border-gray-300 p-2'>
-                <button className='text-blue-500'>Edit</button><button className='text-blue-500'>Delete</button>
+                <button className='bg-blue-500 text-white px-2 py-1 rounded mr-2'>Edit</button>
+                <button className='bg-red-500 text-white px-2 py-1 rounded'>Delete</button>
               </td>
             </tr>
           ))}
