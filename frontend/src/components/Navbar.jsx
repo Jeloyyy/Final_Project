@@ -18,6 +18,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('Fullname')
+    localStorage.removeItem('Email')
     navigate('/')
   }
 
